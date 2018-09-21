@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:54:10 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/19 21:05:09 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/21 15:34:48 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,69 @@ void        print(void *tree)
 }
 //////////////////////////////////////////////////////////////
 
-int			tri(void *a, void *b)
+///////////////////////////////////////////////////////////////////
+//							TREES								//
+///////////////////////////////////////////////////////////////////
+
+void		ft_btree_apply_infix_forls(t_btree *tree, t_ftlsenv *env, void (*func)(void *, t_ftlsenv *env))
+{
+	if (tree == NULL)
+		return;
+	if (tree->left != NULL)
+		ft_btree_apply_infix_forls(tree->left, env, func);
+	(*func)((void *)tree, env);
+	if (tree->right != NULL)
+		ft_btree_apply_infix_forls(tree->right, env, func);
+}
+
+void		ft_btree_apply_rev_infix_forls(t_btree *tree, t_ftlsenv *env, void (*func)(void *, t_ftlsenv *env))
+{
+	if (tree == NULL)
+		return;
+	if (tree->right != NULL)
+		ft_btree_apply_infix_forls(tree->right, env, func);
+	(*func)((void *)tree, env);
+	if (tree->left != NULL)
+		ft_btree_apply_infix_forls(tree->left, env, func);
+}
+/////////////////////////////////////////////////////////////////
+
+int			tri_normal(void *a, void *b)
 {
 	const char *na;
 	const char *nb;
 
 	na = ((t_lsfile *)(a))->name;
 	nb = ((t_lsfile *)(b))->name;
-	return (strcmp(na, nb));
+	return (ft_strcmp(na, nb));
+}
+
+int			tri_time(void *a, void *b)
+{
+	time_t na;
+	time_t nb;
+
+	na = ((t_lsfile *)(a))->stat_infos.st_mtimespec.tv_sec;
+	nb = ((t_lsfile *)(b))->stat_infos.st_mtimespec.tv_sec;
+	if (na == nb)
+		return (tri_normal(a, b));
+	else if (na <= nb)
+		return (1);
+	return (-1);
+}
+
+int			(*get_tri_func(t_options opt))(void *, void *)
+{
+	if (opt.t)
+		return (tri_time);
+	else
+		return (tri_normal);
 }
 
 int     err_illegal_option(char op)
 {
-     ft_printf("Illegal option -%c\n", op);
-      exit(0);
+	ft_printf("Illegal option -%c\n", op);
+	exit(0);
  }
 
 int     is_valid_option(char op)
@@ -100,7 +149,7 @@ t_lsfile	*create_file(char *name, struct stat st)
 	return (file);
 }
 
-int		ft_ls(char *path)
+int		ft_ls(char *path, t_ftlsenv *env)
 {
 	t_btree			*tree;
 	struct stat		file;
@@ -144,14 +193,23 @@ int		ft_ls(char *path)
 				exit(0);
 			}
 			// pas option -a
-			if (dir->d_name[0] != '.')
+			if (env->options.a)
 			{
 				// Si l'arbre existe pas on le fait
 				if (tree == NULL)
 					tree = ft_btree_create_node(create_file(dir->d_name, file));
 				// Si l'arbre existe on insert
 				else
-					ft_btree_insert_data(&tree, NULL, create_file(dir->d_name, file), tri);
+					ft_btree_insert_data(&tree, NULL, create_file(dir->d_name, file), get_tri_func(env->options));
+			}
+			else if (dir->d_name[0] != '.')
+			{
+				// Si l'arbre existe pas on le fait
+				if (tree == NULL)
+					tree = ft_btree_create_node(create_file(dir->d_name, file));
+				// Si l'arbre existe on insert
+				else
+					ft_btree_insert_data(&tree, NULL, create_file(dir->d_name, file), get_tri_func(env->options));
 			}
 			ft_strdel(&new_path);
 		}
@@ -172,20 +230,22 @@ int		ft_ls(char *path)
 	return (0);
 }
 
-void    print_fichiers(void *tree)
+
+
+void    print_fichiers(void *tree, t_ftlsenv *env)
 {
 	// Si c'est pas un dossier
 	if (((((t_lsfile *)((t_btree *)(tree))->data))->stat_infos.st_mode & S_IFMT) != S_IFDIR)
-		ft_ls((((t_lsfile *)((t_btree *)(tree))->data))->name);
+		ft_ls((((t_lsfile *)((t_btree *)(tree))->data))->name, env);
 }
 
-void	print_dossiers(void *tree)
+void	print_dossiers(void *tree, t_ftlsenv *env)
 {
 	if (((((t_lsfile *)((t_btree *)(tree))->data))->stat_infos.st_mode & S_IFMT) == S_IFDIR)
 	{
 	// Print du nom
 		ft_printf("%s:\n", (((t_lsfile *)((t_btree *)(tree))->data))->name);
-		ft_ls((((t_lsfile *)((t_btree *)(tree))->data))->name);
+		ft_ls((((t_lsfile *)((t_btree *)(tree))->data))->name, env);
 		ft_printf("\n");
 	}
 }
@@ -229,26 +289,26 @@ int     main(int ac, char **av)
 				if (args == NULL)
 					args = ft_btree_create_node(create_file(av[i], file));
 				else
-					ft_btree_insert_data(&args, NULL, create_file(av[i], file), tri);
+					ft_btree_insert_data(&args, NULL, create_file(av[i], file), get_tri_func(env.options));
 			}
 		}
 		// Si pas d'arbre = Pas de fichiers en arguments
 		if (args == NULL)
-			ft_ls(".");
+			ft_ls(".", &env);
 		// Sinon affichage des fichiers arguments
 		else
 		{
 			// print les fichiers
-			ft_btree_apply_infix(args, print_fichiers);
+			ft_btree_apply_infix_forls(args, &env, print_fichiers);
 			ft_printf("\n");
 			// print les dossier
-			ft_btree_apply_infix(args, print_dossiers);
+			ft_btree_apply_infix_forls(args, &env, print_dossiers);
 		}
 	}
 	// Si pas d'arguments
 	else
 	{
-		ft_ls("."/*, &env*/);
+		ft_ls(".", &env);
 	}
 	return (0);
 }
