@@ -100,7 +100,6 @@ t_lsfile	*create_file(char *name, struct stat st)
 	return (file);
 }
 
-// FT LS
 int		ft_ls(char *path)
 {
 	t_btree			*tree;
