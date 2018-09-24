@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 09:31:05 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/08/29 18:49:32 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/23 23:10:04 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,6 @@ char				*ft_itoa_base(int n, int base);
 char				*ft_lli_itoa_base(long long int n, char *base_str);
 char				*ft_ulli_itoa_base(unsigned long long int n,
 						char *base_str);
+int					ft_count(int n);
 
 #endif

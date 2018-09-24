@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/14 16:48:13 by ndubouil          #+#    #+#              #
-#    Updated: 2018/09/22 03:52:16 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/09/24 14:17:25 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 CC		=	/usr/bin/gcc
 AR		=	/usr/bin/ar
 RM		=	/bin/rm
-CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror
 
 # Directories
 
@@ -30,7 +30,9 @@ HFILES	=	$(H)ft_ls.h
 MAIN	=	main.c
 SRCS	=	$(SRC)sort.c				\
 			$(SRC)parsing.c				\
-			$(SRC)trees_tools.c
+			$(SRC)trees_tools.c			\
+			$(SRC)print.c				\
+			$(SRC)ft_ls.c
 OBJ		=	$(patsubst %.c,%.o,$(SRCS))
 # Name
 

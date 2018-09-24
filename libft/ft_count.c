@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_count.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 14:22:15 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/24 01:17:42 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/09/23 22:06:34 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/09/23 23:10:15 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+int	ft_count(int n)
 {
-	char	*str;
-	size_t	size;
-	int		i;
+	long long int		i;
 
-	if (s1 == NULL)
-		return (NULL);
-	size = ft_strlen(s1);
-	if (!(str = ft_strnew(sizeof(char) * size)))
-		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+	i = 1;
+	while (n >= 10)
 	{
-		str[i] = s1[i];
+		n = n / 10;
 		i++;
 	}
-	return (str);
+	return (i - 1);
 }

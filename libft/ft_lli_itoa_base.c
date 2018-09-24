@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lli_itoa_base.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndubouil <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 15:30:02 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/26 22:00:27 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/23 22:13:42 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count(long long int n, int base)
+static int	ft_count_base(long long int n, int base)
 {
 	int		i;
 
@@ -34,7 +34,7 @@ char		*ft_lli_itoa_base(long long int n, char *base_str)
 
 	base = ft_strlen(base_str);
 	isneg = n < 0 ? 1 : 0;
-	len = ft_count(n, base);
+	len = ft_count_base(n, base);
 	if (!(result = ft_strnew(len + isneg)))
 		return (NULL);
 	result[0] = isneg ? '-' : '0';

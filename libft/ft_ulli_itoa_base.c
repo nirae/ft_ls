@@ -6,13 +6,13 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 20:14:51 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/06/25 20:06:16 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/23 22:14:28 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count(unsigned long long int n, int base)
+static int	ft_count_base(unsigned long long int n, int base)
 {
 	int		i;
 
@@ -32,7 +32,7 @@ char		*ft_ulli_itoa_base(unsigned long long int n, char *base_str)
 	char	*result;
 
 	base = ft_strlen(base_str);
-	len = ft_count(n, base);
+	len = ft_count_base(n, base);
 	if (!(result = ft_strnew(len + 1)))
 		return (NULL);
 	result[0] = '0';

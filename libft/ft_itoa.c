@@ -6,24 +6,11 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 08:23:34 by ndubouil          #+#    #+#             */
-/*   Updated: 2017/11/22 12:21:45 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/23 22:10:43 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_count(int n)
-{
-	int		i;
-
-	i = 1;
-	while (n >= 10)
-	{
-		n = n / 10;
-		i++;
-	}
-	return (i - 1);
-}
 
 char		*ft_itoa(int n)
 {

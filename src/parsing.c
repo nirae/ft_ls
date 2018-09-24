@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 01:05:29 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/22 03:52:10 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/24 01:05:59 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,12 @@ int			ls_parser(char **av, t_ftlsenv *env, t_btree **args)
 			// Recupere les infos avec lstat et test du fichier
 			if ((lstat(av[i], &file)) < 0)
 			{
-				ft_printf("erreur de lstat\n");
-				// GERER L'ERREUR
-				exit(0);
+				ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
+				if (av[i + 1] == '\0')
+					return (FALSE);
+				continue;
 			}
 			// Creation de l'arbre des arguments
-
-			/*if (*args == NULL)
-				*args = ft_btree_create_node(create_file(av[i], av[i], file));
-			else
-				ft_btree_insert_data(args, NULL, create_file(av[i], av[i], file),
-					get_sort_func(env->options));*/
 			create_tree(args, create_file(av[i], av[i], file), env);
 
 		}
