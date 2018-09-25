@@ -6,17 +6,15 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 01:05:29 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/24 01:05:59 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/24 16:53:33 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int     err_illegal_option(char op)
-{
-	ft_printf("Illegal option -%c\n", op);
-	exit(0);
-}
+/*
+**	Check if the option is valid, return TRUE or FALSE
+*/
 
 static int     is_valid_option(char op)
 {
@@ -25,12 +23,22 @@ static int     is_valid_option(char op)
     return (FALSE);
 }
 
+/*
+**	Set the good option in the env struct. Check the options recursively
+**	- If an option is not valid (check with is_valid_option()), print the error
+*	and exit the program with EXIT_FAILURE;
+*/
+
 static void    set_options(char *ops, t_ftlsenv *env, int pos)
 {
 	if (ops[pos] == '\0')
 		return;
 	if (!is_valid_option(ops[pos]))
- 		err_illegal_option(ops[pos]);
+	{
+		ft_printf("ft_ls: illegal option -- %c\nusage: ft_ls [-%s] [file ...]\n"
+			, ops[pos], OPTS);
+		exit(EXIT_FAILURE);
+	}
 	if (ops[pos] == 'l')
 		env->options.l = TRUE;
 	else if (ops[pos] == 'a')
@@ -44,26 +52,39 @@ static void    set_options(char *ops, t_ftlsenv *env, int pos)
 	set_options(ops, env, (pos + 1));
 }
 
+/*
+**	The parser
+**
+**	params: av -> arguments
+**			env -> "environment" struct
+**			args -> A pointer to the tree of the arguments in the main()
+**	return: FALSE if failed or TRUE
+**
+**	Description:
+**
+**	- For each argument in av
+**		- If the argument is a potential option
+**			- Call set_options for catch it and set in env
+**		- Or else, the argument is probably a file/dir
+**			- Get the informations about the file with lstat and manage the
+**			error if it happens. If its the last argument, return FALSE, else
+**			continue
+**			- Create the node for the file in the tree args
+**	- Return TRUE
+*/
+
 int			ls_parser(char **av, t_ftlsenv *env, t_btree **args)
 {
 	int				i;
 	struct stat		file;
-	// Boucle sur les arguments
+
 	i = 0;
 	while (av[++i])
 	{
-		// Si l'argument est une option
 		if (((av[i][0] == '-') && (av[i][1] != '\0')) && *args == NULL)
-		{
-			// Recupere les options
 			set_options(av[i], env, 1);
-			//// DEBUG ////
-			//ft_printf("options: l:%d, a:%d, R:%d, r:%d, t:%d\n", env->options.l, env->options.a, env->options.R, env->options.r, env->options.t);
-		}
-		// Sinon, l'argument est un nom de fichier potentiel
 		else
 		{
-			// Recupere les infos avec lstat et test du fichier
 			if ((lstat(av[i], &file)) < 0)
 			{
 				ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
@@ -71,9 +92,7 @@ int			ls_parser(char **av, t_ftlsenv *env, t_btree **args)
 					return (FALSE);
 				continue;
 			}
-			// Creation de l'arbre des arguments
 			create_tree(args, create_file(av[i], av[i], file), env);
-
 		}
 	}
 	return (TRUE);

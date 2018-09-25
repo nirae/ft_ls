@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/14 16:48:13 by ndubouil          #+#    #+#              #
-#    Updated: 2018/09/24 14:17:25 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/09/25 02:05:48 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,23 @@ SRC		=	./src/
 #  Files
 
 HFILES	=	$(H)ft_ls.h
-MAIN	=	main.c
-SRCS	=	$(SRC)sort.c				\
-			$(SRC)parsing.c				\
-			$(SRC)trees_tools.c			\
-			$(SRC)print.c				\
-			$(SRC)ft_ls.c
+MAIN	=	$(SRC)main.c
+SRCS	=	$(SRC)sort/get_sort_func.c								\
+			$(SRC)sort/basic_sort.c									\
+			$(SRC)sort/mtime_nano_sort.c							\
+			$(SRC)sort/mtime_sort.c									\
+			$(SRC)parsing.c											\
+			$(SRC)trees_tools.c										\
+			$(SRC)errors.c											\
+			$(SRC)ft_ls.c											\
+			$(SRC)printing/print_tree.c								\
+			$(SRC)printing/print_recursive.c						\
+			$(SRC)printing/print_main_args.c						\
+			$(SRC)printing/ls_printer.c								\
+			$(SRC)printing/print_long_format/getters.c				\
+			$(SRC)printing/print_long_format/print_time.c			\
+			$(SRC)printing/print_long_format/print_long_format.c
+
 OBJ		=	$(patsubst %.c,%.o,$(SRCS))
 # Name
 
