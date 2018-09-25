@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:52:47 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 19:06:56 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 23:03:03 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int				atime_sort_rev(void *a, void *b);
 int				atime_nano_sort(void *a, void *b);
 int				atime_nano_sort_rev(void *a, void *b);
 int				f_sort(void *a, void *b);
-int				f_sort_rev(void *a, void *b);
 
 /*
 **	TREES TOOLS (src/trees_tools.c)

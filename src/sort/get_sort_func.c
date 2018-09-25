@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 17:01:18 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 20:09:17 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 23:04:10 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 
 t_func_ptr		get_sort_func(t_options opt)
 {
-	if (opt.u && opt.t)
+	if (opt.f)
+		return (f_sort);
+	else if (opt.u && opt.t)
 	{
 		if (opt.r)
 			return (atime_sort_rev);
@@ -31,14 +33,6 @@ t_func_ptr		get_sort_func(t_options opt)
 	}
 	else if (opt.t)
 		return ((opt.r) ? mtime_sort_rev : mtime_sort);
-	else if (opt.f)
-	{
-		if (opt.r)
-			return (f_sort_rev);
-		else
-			return (f_sort);
-	}
-
 	else
 	{
 		if (opt.r)
