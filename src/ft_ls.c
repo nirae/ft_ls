@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 14:13:54 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 18:14:02 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 20:27:20 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	manage_rep(char *path, t_ftlsenv *env, t_btree **tree, int *total)
 			catch_error(path);
 			continue;
 		}
-		if (env->options.a || dir->d_name[0] != '.')
+		if ((env->options.a || env->options.f) || dir->d_name[0] != '.')
 		{
 			*total += file.st_blocks;
 			create_tree(tree, create_file(dir->d_name, new_path, file), env);

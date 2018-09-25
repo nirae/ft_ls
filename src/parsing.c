@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 01:05:29 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 18:32:17 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 19:56:19 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static int		is_valid_option(char op)
 {
 	if (op == 'l' || op == 'a' || op == 'R' || op == 'r' || op == 't'
-		|| op == 'f')
+		|| op == 'f' || op == 'u')
 		return (TRUE);
 	return (FALSE);
 }
@@ -52,6 +52,8 @@ static void		set_options(char *ops, t_ftlsenv *env, int pos)
 		env->options.r = TRUE;
 	else if (ops[pos] == 't')
 		env->options.t = TRUE;
+	else if (ops[pos] == 'u')
+		env->options.u = TRUE;
 	set_options(ops, env, (pos + 1));
 }
 

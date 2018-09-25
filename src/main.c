@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:54:10 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 18:12:26 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 19:54:48 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void		init_env(t_ftlsenv *env)
 	env->options.big_r = FALSE;
 	env->options.r = FALSE;
 	env->options.t = FALSE;
+	env->options.f = FALSE;
+	env->options.u = FALSE;
 	env->tree = NULL;
 	env->nb_rep = 0;
 	env->nb_files = 0;

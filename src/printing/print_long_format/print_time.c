@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 00:46:20 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 18:06:02 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 20:12:02 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,18 @@ static void		get_min(char *cctime, char min[3])
 **	Print the date of the file, cutting the ctime result for made my formatting
 */
 
-void			print_time(time_t *timer)
+void			print_time(struct stat st, t_options opts)
 {
 	char		*cctime;
 	t_date		date;
 	int			i;
+	time_t		t;
 
-	cctime = ctime(timer);
+	if (opts.u)
+		t = st.st_atimespec.tv_sec;
+	else
+		t = st.st_mtimespec.tv_sec;
+	cctime = ctime(&t);
 	i = -1;
 	get_month(cctime, date.month);
 	get_day(cctime, date.day);
@@ -88,7 +93,7 @@ void			print_time(time_t *timer)
 	while (++i < 4)
 		date.year[i] = cctime[20 + i];
 	date.year[i] = '\0';
-	if (*timer < (time(NULL) - 15778800))
+	if (t < (time(NULL) - 15778800))
 		ft_printf("%s %s %5s", date.month, date.day, date.year);
 	else
 		ft_printf("%s %s %s:%s", date.month, date.day, date.hour, date.min);

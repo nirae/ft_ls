@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:52:47 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 18:32:31 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 19:06:56 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 # define TRUE		1
 # define FALSE		0
-# define OPTS		"Raflrt"
+# define OPTS		"Raflrtu"
 
 typedef int		(*t_func_ptr)(void *, void *);
 
@@ -52,6 +52,7 @@ typedef struct	s_options
 	int			r;
 	int			t;
 	int			f;
+	int			u;
 }				t_options;
 
 typedef struct	s_lsfile
@@ -84,6 +85,10 @@ int				mtime_nano_sort(void *a, void *b);
 int				mtime_nano_sort_rev(void *a, void *b);
 int				mtime_sort(void *a, void *b);
 int				mtime_sort_rev(void *a, void *b);
+int				atime_sort(void *a, void *b);
+int				atime_sort_rev(void *a, void *b);
+int				atime_nano_sort(void *a, void *b);
+int				atime_nano_sort_rev(void *a, void *b);
 int				f_sort(void *a, void *b);
 int				f_sort_rev(void *a, void *b);
 
@@ -116,7 +121,7 @@ char			get_type(mode_t mode);
 char			*get_mode(mode_t mode);
 char			*get_owner(uid_t uid);
 char			*get_group(gid_t gid);
-void			print_time(time_t *timer);
+void			print_time(struct stat st, t_options opts);
 void			print_files_args(void *tree, t_ftlsenv *env);
 void			print_dir_args(void *tree, t_ftlsenv *env);
 void			print_tree(void *tree);
