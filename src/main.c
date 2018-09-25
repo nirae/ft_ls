@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:54:10 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/24 18:14:12 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 18:12:26 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static void		set_nb_rep_files(void *tree, t_ftlsenv *env)
 **	Initialisation of the "environment" struct
 */
 
-static void    init_env(t_ftlsenv *env)
+static void		init_env(t_ftlsenv *env)
 {
-    env->options.l = FALSE;
-    env->options.a = FALSE;
-    env->options.R = FALSE;
-    env->options.r = FALSE;
-    env->options.t = FALSE;
+	env->options.l = FALSE;
+	env->options.a = FALSE;
+	env->options.big_r = FALSE;
+	env->options.r = FALSE;
+	env->options.t = FALSE;
 	env->tree = NULL;
 	env->nb_rep = 0;
 	env->nb_files = 0;
@@ -64,10 +64,10 @@ static void    init_env(t_ftlsenv *env)
 **	- Return EXIT_SUCCESS
 */
 
-int     main(int ac, char **av)
+int				main(int ac, char **av)
 {
-	t_ftlsenv   env;
-	t_btree     *args;
+	t_ftlsenv	env;
+	t_btree		*args;
 
 	(void)ac;
 	args = NULL;

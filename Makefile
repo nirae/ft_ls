@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/14 16:48:13 by ndubouil          #+#    #+#              #
-#    Updated: 2018/09/25 02:05:48 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/09/25 18:30:20 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS	=	$(SRC)sort/get_sort_func.c								\
 			$(SRC)sort/basic_sort.c									\
 			$(SRC)sort/mtime_nano_sort.c							\
 			$(SRC)sort/mtime_sort.c									\
+			$(SRC)sort/f_sort.c									\
 			$(SRC)parsing.c											\
 			$(SRC)trees_tools.c										\
 			$(SRC)errors.c											\

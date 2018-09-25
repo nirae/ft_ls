@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 01:31:48 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 00:15:30 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 18:18:26 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_lsfile	*create_file(char *name, char *path, struct stat st)
 **	Free a t_lsfile struct
 */
 
-void	del_file(void *data)
+void		del_file(void *data)
 {
 	ft_strdel(&((t_lsfile *)(data))->name);
 	ft_strdel(&((t_lsfile *)(data))->path);
@@ -51,7 +51,7 @@ void		ft_btree_apply_infix_forls(t_btree *tree, t_ftlsenv *env,
 				void (*func)(void *, t_ftlsenv *env))
 {
 	if (tree == NULL)
-		return;
+		return ;
 	if (tree->left != NULL)
 		ft_btree_apply_infix_forls(tree->left, env, func);
 	(*func)((void *)tree, env);
@@ -68,7 +68,7 @@ void		ft_btree_apply_rev_infix_forls(t_btree *tree, t_ftlsenv *env,
 				void (*func)(void *, t_ftlsenv *env))
 {
 	if (tree == NULL)
-		return;
+		return ;
 	if (tree->right != NULL)
 		ft_btree_apply_infix_forls(tree->right, env, func);
 	(*func)((void *)tree, env);

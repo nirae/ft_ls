@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 00:46:20 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 01:08:28 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 18:06:02 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 static void		get_month(char *cctime, char month[4])
 {
-	int 	i;
+	int			i;
 
 	i = -1;
 	while (++i < 3)
@@ -33,7 +33,7 @@ static void		get_month(char *cctime, char month[4])
 
 static void		get_day(char *cctime, char day[3])
 {
-	int		i;
+	int			i;
 
 	i = -1;
 	while (++i < 2)
@@ -47,7 +47,7 @@ static void		get_day(char *cctime, char day[3])
 
 static void		get_hour(char *cctime, char hour[3])
 {
-	int		i;
+	int			i;
 
 	i = -1;
 	while (++i < 2)
@@ -61,7 +61,7 @@ static void		get_hour(char *cctime, char hour[3])
 
 static void		get_min(char *cctime, char min[3])
 {
-	int		i;
+	int			i;
 
 	i = -1;
 	while (++i < 2)
@@ -73,13 +73,14 @@ static void		get_min(char *cctime, char min[3])
 **	Print the date of the file, cutting the ctime result for made my formatting
 */
 
-void	print_time(time_t *timer)
+void			print_time(time_t *timer)
 {
 	char		*cctime;
 	t_date		date;
+	int			i;
 
 	cctime = ctime(timer);
-	int i = -1;
+	i = -1;
 	get_month(cctime, date.month);
 	get_day(cctime, date.day);
 	get_hour(cctime, date.hour);
@@ -87,7 +88,6 @@ void	print_time(time_t *timer)
 	while (++i < 4)
 		date.year[i] = cctime[20 + i];
 	date.year[i] = '\0';
-
 	if (*timer < (time(NULL) - 15778800))
 		ft_printf("%s %s %5s", date.month, date.day, date.year);
 	else

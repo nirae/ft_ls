@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 00:19:32 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 00:24:56 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 18:00:39 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	print_recursive(void *tree, t_ftlsenv *env)
 	if (((mode & S_IFMT) == S_IFDIR)
 		&& (ft_strcmp(n, ".") != 0 && ft_strcmp(n, "..")))
 	{
-	// Print du nom
 		ft_printf("\n%s:\n", (((t_lsfile *)((t_btree *)(tree))->data))->path);
 		ft_ls((((t_lsfile *)((t_btree *)(tree))->data))->path, env);
-		//ft_printf("\n");
 	}
 }

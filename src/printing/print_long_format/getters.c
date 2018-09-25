@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 00:39:48 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 00:42:55 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 17:57:46 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ char		get_type(mode_t mode)
 
 char		*get_mode(mode_t mode)
 {
-	char	model[] = "rwxrwxrwx";
+	char	model[10];
 	char	*result;
-	int		i = -1;
+	int		i;
 
+	ft_strcpy(model, "rwxrwxrwx");
+	i = -1;
 	if (!(result = ft_strnew(sizeof(char) * 9)))
 		err_malloc();
 	while (++i < 9)

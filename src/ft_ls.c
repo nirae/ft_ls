@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 14:13:54 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/24 23:56:53 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 18:14:02 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ static int	manage_rep(char *path, t_ftlsenv *env, t_btree **tree, int *total)
 **	- Return TRUE
 */
 
-int		ft_ls(char *path, t_ftlsenv *env)
+int			ft_ls(char *path, t_ftlsenv *env)
 {
 	t_btree			*tree;
 	struct stat		file;
@@ -148,7 +148,7 @@ int		ft_ls(char *path, t_ftlsenv *env)
 			return (FALSE);
 		env->options.l ? ft_printf("total %d\n", total) : 0;
 		ft_btree_apply_infix_forls(tree, env, ls_printer);
-		if (env->options.R)
+		if (env->options.big_r)
 			ft_btree_apply_infix_forls(tree, env, print_recursive);
 	}
 	else

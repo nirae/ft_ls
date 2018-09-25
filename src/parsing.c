@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 01:05:29 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/24 16:53:33 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 18:32:17 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,24 @@
 **	Check if the option is valid, return TRUE or FALSE
 */
 
-static int     is_valid_option(char op)
+static int		is_valid_option(char op)
 {
-    if (op == 'l' || op == 'a' || op == 'R' || op == 'r' || op == 't')
-        return (TRUE);
-    return (FALSE);
+	if (op == 'l' || op == 'a' || op == 'R' || op == 'r' || op == 't'
+		|| op == 'f')
+		return (TRUE);
+	return (FALSE);
 }
 
 /*
 **	Set the good option in the env struct. Check the options recursively
 **	- If an option is not valid (check with is_valid_option()), print the error
-*	and exit the program with EXIT_FAILURE;
+**	and exit the program with EXIT_FAILURE;
 */
 
-static void    set_options(char *ops, t_ftlsenv *env, int pos)
+static void		set_options(char *ops, t_ftlsenv *env, int pos)
 {
 	if (ops[pos] == '\0')
-		return;
+		return ;
 	if (!is_valid_option(ops[pos]))
 	{
 		ft_printf("ft_ls: illegal option -- %c\nusage: ft_ls [-%s] [file ...]\n"
@@ -43,8 +44,10 @@ static void    set_options(char *ops, t_ftlsenv *env, int pos)
 		env->options.l = TRUE;
 	else if (ops[pos] == 'a')
 		env->options.a = TRUE;
+	else if (ops[pos] == 'f')
+		env->options.f = TRUE;
 	else if (ops[pos] == 'R')
-		env->options.R = TRUE;
+		env->options.big_r = TRUE;
 	else if (ops[pos] == 'r')
 		env->options.r = TRUE;
 	else if (ops[pos] == 't')
@@ -73,7 +76,7 @@ static void    set_options(char *ops, t_ftlsenv *env, int pos)
 **	- Return TRUE
 */
 
-int			ls_parser(char **av, t_ftlsenv *env, t_btree **args)
+int				ls_parser(char **av, t_ftlsenv *env, t_btree **args)
 {
 	int				i;
 	struct stat		file;

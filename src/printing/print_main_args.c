@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 00:26:36 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 00:28:44 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/25 17:59:02 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Function for printing the files in the main and call ft_ls()
 */
 
-void    print_files_args(void *tree, t_ftlsenv *env)
+void	print_files_args(void *tree, t_ftlsenv *env)
 {
 	if (((((t_lsfile *)((t_btree *)(tree))->data))->st.st_mode & S_IFMT)
 		!= S_IFDIR)

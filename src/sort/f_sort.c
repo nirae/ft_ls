@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_mode.c                                         :+:      :+:    :+:   */
+/*   f_sort.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/25 00:37:43 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 00:39:10 by ndubouil         ###   ########.fr       */
+/*   Created: 2018/09/25 18:26:39 by ndubouil          #+#    #+#             */
+/*   Updated: 2018/09/25 18:33:12 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-**	Return a string with the mode/rights of the file
+**	Sort function for the option "-f"
 */
 
-char		*get_mode(mode_t mode)
+int		f_sort(void *a, void *b)
 {
-	char	model[] = "rwxrwxrwx";
-	char	*result;
-	int		i = -1;
+	(void)a;
+	(void)b;
+	return (-1);
+}
 
-	if (!(result = ft_strnew(sizeof(char) * 9)))
-		err_malloc();
-	while (++i < 9)
-	{
-		if (mode & (1 << (8 - i)))
-			result[i] = model[i];
-		else
-			result[i] = '-';
-	}
-	return (result);
+int		f_sort_rev(void *a, void *b)
+{
+	(void)a;
+	(void)b;
+	return (1);
 }
