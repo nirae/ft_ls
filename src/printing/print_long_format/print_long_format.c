@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 01:09:04 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 19:53:28 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/26 15:34:07 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void			print_long_format(t_lsfile *file, t_ftlsenv *env)
 			tool.group,
 			env->len_max_size,
 			file->st.st_size);
-	//print_time(&file->st.st_mtimespec.tv_sec);
 	print_time(file->st, env->options);
 	ft_printf(" %s", file->name);
 	if (get_type(file->st.st_mode) == 'l')
