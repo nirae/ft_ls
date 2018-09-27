@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:52:47 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 23:03:03 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/27 18:12:28 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,11 @@ typedef struct	s_ftlsenv
 	int			len_max_size;
 	int			len_max_owner;
 	int			len_max_group;
+	int			len_max_major;
+	int			len_max_minor;
 	int			nb_rep;
 	int			nb_files;
+	int			ifdevices;
 }				t_ftlsenv;
 
 /*

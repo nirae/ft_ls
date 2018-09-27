@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:54:10 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 19:54:48 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/27 18:05:25 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void		init_env(t_ftlsenv *env)
 	env->tree = NULL;
 	env->nb_rep = 0;
 	env->nb_files = 0;
+	env->ifdevices = FALSE;
 }
 
 /*

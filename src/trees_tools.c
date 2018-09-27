@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 01:31:48 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 18:18:26 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/27 21:13:52 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,13 @@ void		create_tree(t_btree **tree, t_lsfile *file, t_ftlsenv *env)
 {
 	int		len;
 
+	if (S_ISCHR(file->st.st_mode) || S_ISBLK(file->st.st_mode))
+		env->ifdevices = TRUE;
+	len = ft_count(major(file->st.st_rdev)) + 1;
+	(len > env->len_max_major) ? env->len_max_major = len : 0;
+	len = ft_count(minor(file->st.st_rdev)) + 1;
+	if (len > env->len_max_minor)
+		env->len_max_minor = len;
 	len = ft_count(file->st.st_nlink) + 1;
 	if (len > env->len_max_links)
 		env->len_max_links = len;

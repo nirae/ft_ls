@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 14:13:54 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 20:27:20 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/27 18:13:29 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	reset_len_max(t_ftlsenv *env)
 	env->len_max_size = 0;
 	env->len_max_group = 0;
 	env->len_max_owner = 0;
+	env->len_max_major = 0;
+	env->len_max_minor = 0;
 }
 
 /*
