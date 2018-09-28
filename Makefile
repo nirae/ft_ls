@@ -6,7 +6,7 @@
 #    By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/14 16:48:13 by ndubouil          #+#    #+#              #
-#    Updated: 2018/09/25 18:56:00 by ndubouil         ###   ########.fr        #
+#    Updated: 2018/09/28 19:20:51 by ndubouil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS	=	$(SRC)sort/get_sort_func.c								\
 			$(SRC)printing/ls_printer.c								\
 			$(SRC)printing/print_long_format/getters.c				\
 			$(SRC)printing/print_long_format/print_time.c			\
+			$(SRC)printing/print_long_format/tool.c					\
 			$(SRC)printing/print_long_format/print_long_format.c
 
 OBJ		=	$(patsubst %.c,%.o,$(SRCS))

@@ -6,39 +6,11 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 01:09:04 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/27 21:07:21 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/28 19:49:47 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-/*
-**	Free the struct t_lformat
-*/
-
-static void		del_tool(t_lformat *tool)
-{
-	ft_strdel(&tool->owner);
-	ft_strdel(&tool->group);
-	ft_strdel(&tool->mode);
-	ft_strdel(&tool->link);
-}
-
-/*
-**	Setting the struct t_lformat with the file informations
-*/
-
-static void		set_tool(t_lformat *tool, t_lsfile *file)
-{
-	if (!(tool->link = ft_strnew(file->st.st_size)))
-		err_malloc();
-	if (!(tool->mode = get_mode(file->st.st_mode)))
-		err_malloc();
-	if (!(tool->owner = ft_strdup(get_owner(file->st.st_uid))))
-		tool->owner = ft_itoa(file->st.st_uid);
-	if (!(tool->group = ft_strdup(get_group(file->st.st_gid))))
-		tool->group = ft_itoa(file->st.st_gid);
-}
 
 void			print_ifdevices_nocb(t_lsfile *f, t_ftlsenv *env, t_lformat t)
 {
@@ -85,6 +57,21 @@ void			print_ifdevices(t_lsfile *file, t_ftlsenv *env, t_lformat tool)
 	ft_strdel(&min);
 }
 
+void			print_link(t_lsfile *file, t_lformat tool)
+{
+	if (ft_strcmp(file->name, "stderr") == 0)
+		ft_printf(" -> fd/2\n");
+	else if (ft_strcmp(file->name, "stdin") == 0)
+		ft_printf(" -> fd/0\n");
+	else if (ft_strcmp(file->name, "stdout") == 0)
+		ft_printf(" -> fd/1\n");
+	else
+	{
+		readlink(file->path, tool.link, file->st.st_size + 1);
+		ft_printf(" -> %s\n", tool.link);
+	}
+}
+
 /*
 **	Printer for the long format "-l" option
 **	Setting the struct with set_tool(), print with the good formatting and free
@@ -107,10 +94,7 @@ void			print_long_format(t_lsfile *file, t_ftlsenv *env)
 	print_time(file->st, env->options);
 	ft_printf(" %s", file->name);
 	if (get_type(file->st.st_mode) == 'l')
-	{
-		readlink(file->path, tool.link, file->st.st_size + 1);
-		ft_printf(" -> %s\n", tool.link);
-	}
+		print_link(file, tool);
 	else
 		ft_printf("\n");
 	del_tool(&tool);

@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 01:05:29 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 19:56:19 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/28 17:42:51 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,18 @@ int				ls_parser(char **av, t_ftlsenv *env, t_btree **args)
 	i = 0;
 	while (av[++i])
 	{
-		if (((av[i][0] == '-') && (av[i][1] != '\0')) && *args == NULL)
-			set_options(av[i], env, 1);
+		if (((av[i][0] == '-') && (av[i][1] != '\0')) && env->takeoptions)
+		{
+			if (av[i][1] == '-')
+				env->takeoptions = FALSE;
+			else
+				set_options(av[i], env, 1);
+		}
 		else
 		{
 			if ((lstat(av[i], &file)) < 0)
 			{
 				ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
-				if (av[i + 1] == '\0')
-					return (FALSE);
 				continue;
 			}
 			create_tree(args, create_file(av[i], av[i], file), env);
