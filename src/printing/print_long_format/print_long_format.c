@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 01:09:04 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/28 19:49:47 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/29 16:43:25 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void			print_link(t_lsfile *file, t_lformat tool)
 		ft_printf(" -> fd/1\n");
 	else
 	{
-		readlink(file->path, tool.link, file->st.st_size + 1);
+		readlink(file->path, tool.link, file->st.st_size);
 		ft_printf(" -> %s\n", tool.link);
 	}
 }
