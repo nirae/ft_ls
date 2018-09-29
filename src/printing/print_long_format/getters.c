@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 00:39:48 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/25 17:57:46 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/28 19:48:59 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 **	Return the good char for the type of the file
 */
 
-char		get_type(mode_t mode)
+char			get_type(mode_t mode)
 {
 	if ((mode & S_IFMT) == S_IFDIR)
 		return ('d');
@@ -37,11 +37,27 @@ char		get_type(mode_t mode)
 	return ('?');
 }
 
+static void		check_specials(mode_t mode, char *result)
+{
+	if ((mode & S_ISUID) && result[2] == 'x')
+		result[2] = 's';
+	else if (mode & S_ISUID)
+		result[2] = 'S';
+	if ((mode & S_ISGID) && result[5] == 'x')
+		result[5] = 's';
+	else if (mode & S_ISGID)
+		result[5] = 'S';
+	if ((mode & S_ISVTX) && result[8] == 'x')
+		result[8] = 't';
+	else if (mode & S_ISVTX)
+		result[8] = 'T';
+}
+
 /*
 **	Return a string with the mode/rights of the file
 */
 
-char		*get_mode(mode_t mode)
+char			*get_mode(mode_t mode)
 {
 	char	model[10];
 	char	*result;
@@ -58,6 +74,7 @@ char		*get_mode(mode_t mode)
 		else
 			result[i] = '-';
 	}
+	check_specials(mode, result);
 	return (result);
 }
 
@@ -65,7 +82,7 @@ char		*get_mode(mode_t mode)
 **	Return the name of the owner of the file
 */
 
-char		*get_owner(uid_t uid)
+char			*get_owner(uid_t uid)
 {
 	struct passwd *tmp;
 
@@ -78,7 +95,7 @@ char		*get_owner(uid_t uid)
 **	Return the name of the group of the file
 */
 
-char		*get_group(gid_t gid)
+char			*get_group(gid_t gid)
 {
 	struct group *tmp;
 

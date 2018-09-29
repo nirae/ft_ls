@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:52:47 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/27 18:12:28 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/09/28 19:21:26 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_ftlsenv
 	int			nb_rep;
 	int			nb_files;
 	int			ifdevices;
+	int			takeoptions;
 }				t_ftlsenv;
 
 /*
@@ -118,7 +119,8 @@ int				ls_parser(char **av, t_ftlsenv *env, t_btree **args);
 
 void			ls_printer(void *tree, t_ftlsenv *env);
 void			print_long_format(t_lsfile *file, t_ftlsenv *env);
-
+void			del_tool(t_lformat *tool);
+void			set_tool(t_lformat *tool, t_lsfile *file);
 char			get_type(mode_t mode);
 char			*get_mode(mode_t mode);
 char			*get_owner(uid_t uid);
