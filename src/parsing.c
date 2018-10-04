@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/22 01:05:29 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/28 17:42:51 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:29:57 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int				ls_parser(char **av, t_ftlsenv *env, t_btree **args)
 			if ((lstat(av[i], &file)) < 0)
 			{
 				ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
+				env->nb_files++;
 				continue;
 			}
 			create_tree(args, create_file(av[i], av[i], file), env);
