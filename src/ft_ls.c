@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 14:13:54 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/10/03 18:20:03 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/10/04 16:34:36 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Reset the len max variables in the "environment" struct
 */
 
-static void	reset_len_max(t_ftlsenv *env)
+void		reset_len_max(t_ftlsenv *env)
 {
 	env->len_max_links = 0;
 	env->len_max_size = 0;
@@ -86,6 +86,7 @@ static int	manage_rep(char *path, t_ftlsenv *env, t_btree **tree, int *total)
 
 	if (!(dirp = opendir(path)))
 		return (catch_error(path));
+	reset_len_max(env);
 	while ((dir = readdir(dirp)) != NULL)
 	{
 		new_path = get_complete_path(path, dir->d_name);
@@ -141,7 +142,6 @@ int			ft_ls(char *path, t_ftlsenv *env)
 
 	tree = NULL;
 	total = 0;
-	reset_len_max(env);
 	if ((lstat(path, &file)) < 0)
 		return (catch_error(path));
 	if ((file.st_mode & S_IFMT) == S_IFDIR)

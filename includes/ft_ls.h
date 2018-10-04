@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:52:47 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/10/03 18:19:43 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/10/04 16:30:51 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ void			print_recursive(void *tree, t_ftlsenv *env);
 /*
 ** LOGIC OF THE LS (src/ft_ls.c)
 */
-
+void			reset_len_max(t_ftlsenv *env);
 int				ft_ls(char *path, t_ftlsenv *env);
 
 /*

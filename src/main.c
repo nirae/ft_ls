@@ -6,7 +6,7 @@
 /*   By: ndubouil <ndubouil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 16:54:10 by ndubouil          #+#    #+#             */
-/*   Updated: 2018/09/28 19:21:48 by ndubouil         ###   ########.fr       */
+/*   Updated: 2018/10/04 16:31:06 by ndubouil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int				main(int ac, char **av)
 	(void)ac;
 	args = NULL;
 	init_env(&env);
+	reset_len_max(&env);
 	if (!ls_parser(av, &env, &args))
 		return (EXIT_FAILURE);
 	if (args == NULL)
